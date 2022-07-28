@@ -25,6 +25,7 @@ Service States
 
 Monitoring other services
 =========================
+
 add to end of app.js
 
 ```js
@@ -35,6 +36,18 @@ Service({
     return response.status === 'success';
   }
 });
+```
+
+add a cgi script in `/cgi-bin` like default one
+
+```sh
+#!/bin/bash
+
+echo "content-type: application/json"
+echo ""
+
+
+echo "{\"status\": \":failure\"}"
 ```
 
 and run main.sh in root project
