@@ -1,4 +1,4 @@
-SERVICES = [];
+const SERVICES = [];
 
 /**
  * @type {Service}
@@ -116,7 +116,7 @@ var playNew = function () {
 
 var parseJSON = function (jsonStr) {
   try {
-    return JSON.stringify(jsonStr);
+    return JSON.parse(jsonStr);
   } catch (e) {
     return jsonStr;
   }
@@ -127,8 +127,6 @@ Service({
   url: "/",
   status: function () {
     const status = [true, false, "pending"][Math.floor(Math.random() * 3)];
-    console.log(status);
-    throw new Error("h");
     return status;
   },
 });
