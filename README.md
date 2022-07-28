@@ -38,7 +38,7 @@ Service({
 });
 ```
 
-add a cgi script in `/cgi-bin` like default one
+add a cgi script in `/cgi-bin` like default one 
 
 ```sh
 #!/bin/bash
@@ -49,6 +49,10 @@ echo ""
 
 echo "{\"status\": \":failure\"}"
 ```
+
+> I known the demo it is stupid, but the shell you can give more imagination of it, I used in my project, because the cicd is not the normal ones liking jenkins and gitlab ci etc.
+> I found the [alphasights/walnut](https://github.com/alphasights/walnut) it is so simple code and full of features of a ci Monitors, So I change one to make the ci more pure for only status displayed. and with the power of python cgi server, I can invoke bash shell like curl to check my building status ( the curl command copy is builtin the chrome, very very helped me)
+
 
 and run main.sh in root project
 
