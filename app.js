@@ -124,9 +124,8 @@ var parseJSON = function (jsonStr) {
 
 Service({
   name: "Service",
-  url: "/",
+  url: "/cgi-bin/ci.sh",
   status: function () {
-    const status = [true, false, "pending"][Math.floor(Math.random() * 3)];
-    return status;
+    return status === 'success';
   },
 });
