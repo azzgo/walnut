@@ -36,3 +36,11 @@ Service({
   }
 });
 ```
+
+and run main.sh in root project
+
+```sh
+./main.sh
+```
+
+visit http://localhost:8000 you can see it
