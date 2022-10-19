@@ -1,7 +1,7 @@
 Walnut
 =================
 
-Tiny CI Monitor with python CGI
+Tiny Monitor with python cgi - you can use cgi monitor what you want to monitor
 
 Features
 ========
@@ -11,15 +11,13 @@ Features
 * Non-blocking
 * Good for displaying on a flatscreen TV
 
-
-
 Service States
 --------------
 
 * Green: up and running
 * Red: service is misbehaving
 * Polling service: making HTTP request to a status api/page
-* Pending: good for CI build/test process
+* Pending: good for monitor target build/test process
 * Unknown: HTTP request to a status page/api has failed
 
 
@@ -32,6 +30,7 @@ add to end of app.js
 Service({
   name: 'Some Cool Apps',                 // will be displayed in the view
   url: '/cgi-bin/ci.sh',                  // url to call
+  method: 'GET',                          // optional, default is get, and can not send post body now
   status: function(response) {            // response json
     return response.status === 'success';
   }
