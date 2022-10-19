@@ -1,10 +1,11 @@
 const SERVICES = [];
 
 /**
- * @type {Service}
- * @property {string} name
- * @property {string} url
- * @property {(status) => boolean | 'pending'} statu
+ * @typedef {Service}
+ * @property {string} Service.name
+ * @property {string} Service.url
+ * @property {string} Service.method: default is GET
+ * @property {(status) => boolean | 'pending' | 'failure' | 'unknown' } Service.status
  *
  * @param {Service} service
  * */
@@ -39,7 +40,7 @@ window.onload = function () {
     service.box.classList.add("waiting");
 
     fetch(service.url, {
-      method: "GET",
+      method: service.method || "GET",
       timeout: 3500,
     }).then(
       (res) => {
@@ -55,6 +56,7 @@ window.onload = function () {
             const status = service.status(res);
             removeClasses(service);
             service.box.classList.add(Statuses[status]);
+
             playIfNeeded(service, status);
 
             repeat(service);
@@ -125,7 +127,8 @@ var parseJSON = function (jsonStr) {
 Service({
   name: "Service",
   url: "/cgi-bin/ci.sh",
-  status: function () {
-    return status === 'success';
+  status: function (ciInfo) {
+    // customised your ciInfo
+    return ciInfo ? "success" : "unknown";
   },
 });
