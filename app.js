@@ -8,16 +8,16 @@ const SERVICES = [];
  * @property {string} name
  * @property {string} url
  * @property {string} method: default is GET
- * @property {(status) => Status } status
+ * @property {(res: any, box: HTMLElement) => Status } status
  *
  * @typedef {Object} GroupService
  * @property {string} url
  * @property {string} method: default is GET
- * @property {Array<{ name: string, status: (status) => Status }>} group
+ * @property {Array<{ name: string, status: (res: any, box: HTMLElement) => Status }>} group
  *
  * @typedef {Object} ServiceLikeObj
  * @property {string} name
- * @property {(status) => Status } status
+ * @property {(res: any, box: HTMLElement) => Status } status
  **/
 
 /**
@@ -72,7 +72,7 @@ window.onload = function () {
         service.method,
         function (res) {
           service.group.forEach(function (item) {
-            const status = item.status(res);
+            const status = item.status(res, box);
             removeClasses(item.box);
             item.box.classList.add(Statuses[status]);
             playIfNeeded(item, status);
@@ -92,7 +92,7 @@ window.onload = function () {
         service.url,
         service.method,
         function (res) {
-          const status = service.status(res);
+          const status = service.status(res, box);
           removeClasses(service.box);
           service.box.classList.add(Statuses[status]);
           playIfNeeded(service, status);
@@ -224,22 +224,22 @@ Service({
   group: [
     {
       name: "web",
-      status: function (ciInfo) {
+      status: function (ciInfo, box) {
         var pipeline = ciInfo.filter(function (ci) {
           return ci.name === "web";
         });
 
-        return pipeline.length > 0 && get_pipeline_status(pipeline[0]);
+        return pipeline.length > 0 && get_pipeline_status(pipeline[0], box);
       },
     },
     {
       name: "admin",
-      status: function (ciInfo) {
+      status: function (ciInfo, box) {
         var pipeline = ciInfo.filter(function (ci) {
           return ci.name === "admin";
         });
 
-        return pipeline.length > 0 && get_pipeline_status(pipeline[0]);
+        return pipeline.length > 0 && get_pipeline_status(pipeline[0], box);
       },
     },
   ],
